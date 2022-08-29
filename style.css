@@ -13,3 +13,7 @@ body {
 .nav{
     margin-left: auto;
 }
+
+.gallery-img{
+    height:250px;
+}
