@@ -17,3 +17,8 @@ body {
 .gallery-img{
     height:250px;
 }
+
+.k-widget{
+    color:white;
+    background-color:black;
+}

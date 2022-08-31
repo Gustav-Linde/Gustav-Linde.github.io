@@ -5,8 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linde Design</title>
-    <link rel="stylesheet" href="style.css">
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link href="css/kendo.common.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/kendo.default.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="js/jquery.min.js"></script>
+    
 </head>
 <body>
     <div class="site-header">
@@ -22,128 +30,141 @@
             <span class="app-button material-icons material-icons-outlined">menu</span>
         </div>
     </div>
-    <div>
-        <h2>Skills</h2>
-        <h4>Coding</h4>
-        <ol>
-            <li>Javascript</li>
-            <li>Python</li>
-                <ul>
-                    <li>Highcharts.js</li>
-                    <li>Knockout.js</li>
-                    <li>Kendo for Jquery</li>
-                    <li>Broadcast Channel</li>
-                    <li>Require.js</li>
-                    <li>Browserify</li>
-                    <li>Service Workers</li>
-                    <li>MQTT</li>
-                </ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>SQL</li>
-            <li>C++</li>
-            <li>Java</li>
-                <ul>
-                    <li>Maven Projects</li>
-                    <li>Payara/Glassfish</li>
-                    <li>Websockets: ActiveMQ</li>
-                </ul>
-            <li>BASH</li>
-        </ol>
-        <h4>Mechanical</h4>
-            <ol>
-                <li></li>
-                <li></li>
-            </ol>
+    <!-- remove height and style in css stylesheet -->
+    <div style="height:800px" data-bind="kendoSplitter: {}">
+        <div>
+            <div>
+                <h2>Skills</h2>
+                <h4>Coding</h4>
+                <ol>
+                    <li>Javascript</li>
+                    <li>Python</li>
+                        <ul>
+                            <li>Highcharts.js</li>
+                            <li>Knockout.js</li>
+                            <li>Kendo for Jquery</li>
+                            <li>Broadcast Channel</li>
+                            <li>Require.js</li>
+                            <li>Browserify</li>
+                            <li>Service Workers</li>
+                            <li>MQTT</li>
+                        </ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>SQL</li>
+                    <li>C++</li>
+                    <li>Java</li>
+                        <ul>
+                            <li>Maven Projects</li>
+                            <li>Payara/Glassfish</li>
+                            <li>Websockets: ActiveMQ</li>
+                        </ul>
+                    <li>BASH</li>
+                </ol>
+                <h4>Mechanical</h4>
+                    <ol>
+                        <li></li>
+                        <li></li>
+                    </ol>
+        
+                <h4>CAD</h4>
+                    <ol>
+                        <li>SolidWorks</li>
+                            <ul>
+                                <li>Configurations</li>
+                                <li>In part modeling</li>
+                                <li>In context Assembly modeling</li>
+                                <li>Linking models to python scripts to dynamicly update</li>
+                            </ul>
+                        <li>Fusion 360</li>
+                    </ol>
+                <h4>Electric & Electronic</h4>
+                <ol>
+                    <li>Arduino Uno, Mini, Nano & Mega</li>
+                    <li>Raspberry Pi</li>
+                    <li>Halleffect Sensors</li>
+                    <li>Relays</li>
+                    <li>RTC modules</li>
+                    <li>Data logging to SD card</li>
+                    <li>CNC control(Python to GRBL)</li>
+                    <li>Strain Gauges with HX711 Board</li>
+                    <li>Bluetooth Module through serial</li>
+                </ol>
+                <h4>Manufacturing</h4>
+                    <ol>
+                        <li>Soldering</li>
+                        <li>Carpentry</li>
+                        <li>Lathe</li>
+                        <li>Milling</li>
+                        <li>Arc & Mig welding</li>
+                    </ol>
+                <h4>Recreational</h4>
+                    <ol>
+                        <li>Running</li>
+                        <li>Guitar</li>
+                        <li>Gym: Fit45</li>
+                        <li>Surfing</li>
+                        <li>Canoeing</li>
+                        <li>Hiking</li>
+                    </ol>
+            </div>
+        
 
-        <h4>CAD</h4>
-            <ol>
-                <li>SolidWorks</li>
-                    <ul>
-                        <li>Configurations</li>
-                        <li>In part modeling</li>
-                        <li>In context Assembly modeling</li>
-                        <li>Linking models to python scripts to dynamicly update</li>
-                    </ul>
-                <li>Fusion 360</li>
-            </ol>
-        <h4>Electric & Electronic</h4>
-        <ol>
-            <li>Arduino Uno, Mini, Nano & Mega</li>
-            <li>Raspberry Pi</li>
-            <li>Halleffect Sensors</li>
-            <li>Relays</li>
-            <li>RTC modules</li>
-            <li>Data logging to SD card</li>
-            <li>CNC control(Python to GRBL)</li>
-            <li>Strain Gauges with HX711 Board</li>
-            <li>Bluetooth Module through serial</li>
-        </ol>
-        <h4>Manufacturing</h4>
-            <ol>
-                <li>Soldering</li>
-                <li>Carpentry</li>
-                <li>Lathe</li>
-                <li>Milling</li>
-                <li>Arc & Mig welding</li>
-            </ol>
-        <h4>Recreational</h4>
-            <ol>
-                <li>Running</li>
-                <li>Guitar</li>
-                <li>Gym: Fit45</li>
-                <li>Surfing</li>
-                <li>Canoeing</li>
-                <li>Hiking</li>
-            </ol>
-    </div>
-
-    <div>
-        <h2>Projects</h2>
-        <h4>Desktop CNC Router</h4>
-        <div class="desktop-cncn-iframe">
-            <iframe src="https://gmail190897.autodesk360.com/shares/public/SH35dfcQT936092f0e4337bab64a68f2018e?mode=embed" 
-            width="640" height="480" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0"></iframe>
+        </div>
+        <div>
+            <div>
+                <h2>Projects</h2>
+                <h4>Desktop CNC Router</h4>
+                <div class="desktop-cncn-iframe">
+                    <!-- https://www.delftstack.com/howto/javascript/iframe-onload/ -->
+                    <iframe src="https://gmail190897.autodesk360.com/shares/public/SH35dfcQT936092f0e4337bab64a68f2018e?mode=embed" 
+                    width="640" height="480" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0"></iframe>
+                </div>
+            </div>
+        
+            <div>
+                <h4>Electric Motor Build</h4>
+                <div class="gallery">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.28.jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.29 (1).jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.29.jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.31.jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.32 (1).jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.32 (2).jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.32.jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.33.jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.34 (1).jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.34.jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.35.jpeg" class="gallery-img">
+                        <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.36.jpeg" class="gallery-img">
+                </div>
+            </div>
+        
+            <div>
+                <h4>Corugated Zink Wall</h4>
+                <div class="gallery">
+                    <img src="projects\Zink Muur\20200613_154843.jpg" class="gallery-img">
+                    <img src="projects\Zink Muur\20200613_154907.jpg" class="gallery-img">
+                    <img src="projects\Zink Muur\20200613_154916.jpg" class="gallery-img">
+                    <img src="projects\Zink Muur\20200613_154927.jpg" class="gallery-img">
+                    <img src="projects\Zink Muur\20200810_155651.jpg" class="gallery-img">
+                    <img src="projects\Zink Muur\20200810_155702.jpg" class="gallery-img">
+                    <img src="projects\Zink Muur\20200924_102759.jpg" class="gallery-img">
+                </div>
+            </div>
+        
+            <div>
+                <h4>Clock from reclaimed pallet wood</h4>
+                <div class="gallery">
+                    <img src="projects\WoodClock\IMG_1212.JPG" class="gallery-img">
+                </div>
+            </div>
         </div>
     </div>
-
-    <div>
-        <h4>Electric Motor Build</h4>
-        <div class="gallery">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.28.jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.29 (1).jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.29.jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.31.jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.32 (1).jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.32 (2).jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.32.jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.33.jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.34 (1).jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.34.jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.35.jpeg" class="gallery-img">
-                <img src="projects\EIR321 Motor\WhatsApp Image 2020-04-28 at 20.12.36.jpeg" class="gallery-img">
-        </div>
-    </div>
-
-    <div>
-        <h4>Corugated Zink Wall</h4>
-        <div class="gallery">
-            <img src="projects\Zink Muur\20200613_154843.jpg" class="gallery-img">
-            <img src="projects\Zink Muur\20200613_154907.jpg" class="gallery-img">
-            <img src="projects\Zink Muur\20200613_154916.jpg" class="gallery-img">
-            <img src="projects\Zink Muur\20200613_154927.jpg" class="gallery-img">
-            <img src="projects\Zink Muur\20200810_155651.jpg" class="gallery-img">
-            <img src="projects\Zink Muur\20200810_155702.jpg" class="gallery-img">
-            <img src="projects\Zink Muur\20200924_102759.jpg" class="gallery-img">
-        </div>
-    </div>
-
-    <div>
-        <h4>Clock from reclaimed pallet wood</h4>
-        <div class="gallery">
-            <img src="projects\WoodClock\IMG_1212.JPG" class="gallery-img">
-        </div>
-    </div>
+    <script src="js/kendo.all.min.js"></script>
+    <script src="js/knockout-3.4.0.js"></script>
+    <script src="js/knockout-kendo.js"></script>
+    <script src="main.js"></script>
     
 </body>
 </html>
