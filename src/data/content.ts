@@ -95,6 +95,14 @@ export const projects: Project[] = [
     link: { label: 'Visit the sales site', href: 'https://www.common-sense.co.za' },
   },
   {
+    title: 'RC Airplane: Best Design Award',
+    tags: ['Best Design award', 'Aerodynamics', 'RC aircraft', 'Team project'],
+    description:
+      'A university group project: we designed and built a radio-controlled airplane using the same aerodynamic principles as a full-size aircraft, and entered it in an engineering competition between universities, where we won the Best Design award. The challenge was to load as many tennis balls as possible onto the plane, fly around, land and drop them in a bucket within a set time. The team with the most balls at the end wins.',
+    folder: 'RCPlane',
+    images: ['rc-plane.jpg'],
+  },
+  {
     title: 'Automated Bottle Filling System',
     tags: ['OpenCV', 'Python', 'CNC'],
     description:
@@ -105,6 +113,21 @@ export const projects: Project[] = [
       { file: 'arm-move.mp4', poster: 'arm-move-poster.jpg', ratio: 716 / 1536 },
       { file: 'detection.mp4', poster: 'detection-poster.jpg', ratio: 848 / 396 },
     ],
+  },
+  {
+    title: 'Cookie Icing Machine',
+    tags: ['OpenCV', 'Python', 'GRBL', '3D printing', 'Prototype'],
+    description:
+      'A prototype machine that ices cookies automatically. A camera looks down on the cookie, OpenCV and Python work out exactly where it sits, and a GRBL controller then drives the icing nozzle to the right place. Built from a 3D-printed frame and rails, with an icing cartridge and nozzle mounted on a moving carriage.',
+    points: [
+      'Image recognition: the camera image is filtered by colour (HSV thresholding) into a mask, and the cookie outline is found as a contour, filtered by contour length to ignore noise',
+      'Centring: the centre of the contour is marked with a crosshair, and the offset from the machine\'s reference point tells it how far the cookie is off-centre',
+      'Motion: the corrected position is sent to the GRBL controller over serial, which moves the nozzle',
+      'Tuning tool: a small control panel for the colour range, contour size, camera and serial port makes it easy to adapt to different cookies and lighting',
+      'Test runs: a cork disc stood in for a cookie to prove the outline detection, and icing patterns were drawn on a tray to check the extrusion and motion',
+    ],
+    folder: 'CookieIcing',
+    images: ['icing-nozzle.jpg', 'cookie-detection.jpg', 'cookie-mask.jpg', 'frame.jpg', 'platter.jpg', 'rails.jpg'],
   },
   {
     title: 'CNC Lathe Conversion',

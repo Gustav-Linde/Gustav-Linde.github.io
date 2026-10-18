@@ -10,12 +10,13 @@ const urls = computed(() => (props.project.images ?? []).map((f) => base.value +
 const wideVideos = computed(() => (props.project.videos ?? []).filter((v) => v.ratio >= 1))
 const portrait = computed(() => (props.project.videos ?? []).find((v) => v.ratio < 1))
 
-// Show at most 9 photos. A portrait video gets the first (up to 6) photos in a column beside it.
-const shown = computed(() => urls.value.slice(0, 9))
+// Without a portrait video show up to 9 photos. With one the card stays compact:
+// portrait video on the left, the wide video and a 2 x 2 photo grid beside it.
+const shown = computed(() => urls.value.slice(0, portrait.value ? 4 : 9))
 const extra = computed(() => urls.value.length - shown.value.length)
-const sideCount = computed(() => (portrait.value ? Math.min(6, shown.value.length) : 0))
-const sideUrls = computed(() => shown.value.slice(0, sideCount.value))
-const restUrls = computed(() => shown.value.slice(sideCount.value))
+const sideUrls = computed(() => (portrait.value ? shown.value : []))
+const restUrls = computed(() => (portrait.value ? [] : shown.value))
+const sideCount = 0
 const restCols = computed(() => Math.min(3, restUrls.value.length))
 const sideRows = computed(() => Math.ceil(sideUrls.value.length / 2))
 
@@ -41,7 +42,7 @@ function isLast(i: number) {
 
 <template>
   <v-card class="glass lift h-100 d-flex flex-column" rounded="xl" :class="{ featured }">
-    <div v-if="wideVideos.length" class="videos">
+    <div v-if="wideVideos.length && !portrait" class="videos">
       <div
         v-for="v in wideVideos"
         :key="v.file"
@@ -71,16 +72,32 @@ function isLast(i: number) {
         <img :src="base + encodeURIComponent(portrait.poster)" :alt="project.title" loading="lazy" />
         <v-icon class="play" icon="mdi-play-circle" size="48" />
       </div>
-      <div class="side-grid" :style="{ gridTemplateRows: `repeat(${sideRows}, 1fr)` }">
+      <div class="side-right">
         <div
-          v-for="(u, i) in sideUrls"
-          :key="u"
-          class="tile cursor-pointer"
-          :class="{ wide: sideUrls.length % 2 === 1 && i === sideUrls.length - 1 }"
-          @click="show(i)"
+          v-for="v in wideVideos"
+          :key="v.file"
+          class="vid"
+          :style="{ aspectRatio: String(v.ratio) }"
+          role="button"
+          tabindex="0"
+          :aria-label="`Play video: ${project.title}`"
+          @click="playing = v"
+          @keydown.enter="playing = v"
         >
-          <img :src="u" :alt="project.title" loading="lazy" />
-          <div v-if="isLast(i)" class="more display">+{{ extra }}</div>
+          <img :src="base + encodeURIComponent(v.poster)" :alt="project.title" loading="lazy" />
+          <v-icon class="play" icon="mdi-play-circle" size="40" />
+        </div>
+        <div class="side-grid" :style="{ gridTemplateRows: `repeat(${sideRows}, 1fr)` }">
+          <div
+            v-for="(u, i) in sideUrls"
+            :key="u"
+            class="tile cursor-pointer"
+            :class="{ wide: sideUrls.length % 2 === 1 && i === sideUrls.length - 1 }"
+            @click="show(i)"
+          >
+            <img :src="u" :alt="project.title" loading="lazy" />
+            <div v-if="isLast(i)" class="more display">+{{ extra }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -170,8 +187,9 @@ function isLast(i: number) {
 .player { max-width: 100vw; max-height: 100vh; width: 100%; height: 100%; object-fit: contain; }
 
 /* Portrait video on the left, photos filling the space beside it */
-.side { display: grid; grid-template-columns: 42% minmax(0, 1fr); gap: 6px; padding: 8px 8px 0; }
-.side-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; min-height: 0; }
+.side { display: grid; grid-template-columns: 34% minmax(0, 1fr); gap: 6px; padding: 8px 8px 0; }
+.side-right { display: flex; flex-direction: column; gap: 6px; min-width: 0; min-height: 0; }
+.side-grid { flex: 1 1 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; min-height: 0; }
 .tile { position: relative; overflow: hidden; border-radius: 12px; min-height: 0; }
 .tile.wide { grid-column: span 2; }
 .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
