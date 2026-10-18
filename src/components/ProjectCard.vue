@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import type { Project } from '../data/content'
 
 const props = defineProps<{ project: Project; featured?: boolean }>()
@@ -17,7 +17,8 @@ const extra = computed(() => urls.value.length - shown.value.length)
 const sideUrls = computed(() => (portrait.value ? shown.value : []))
 const restUrls = computed(() => (portrait.value ? [] : shown.value))
 const sideCount = 0
-const restCols = computed(() => Math.min(3, restUrls.value.length))
+const heroLayout = computed(() => props.project.layout === 'hero' && restUrls.value.length === 5)
+const restCols = computed(() => (heroLayout.value ? 4 : Math.min(3, restUrls.value.length)))
 const sideRows = computed(() => Math.ceil(sideUrls.value.length / 2))
 
 const open = ref(false)
@@ -30,6 +31,18 @@ const videoOpen = computed({
   get: () => playing.value !== null,
   set: (v: boolean) => { if (!v) playing.value = null },
 })
+
+// Left and right arrow keys move through the photos while the viewer is open
+function onKey(e: KeyboardEvent) {
+  const n = urls.value.length
+  if (e.key === 'ArrowRight') current.value = (current.value + 1) % n
+  else if (e.key === 'ArrowLeft') current.value = (current.value - 1 + n) % n
+}
+watch(open, (isOpen) => {
+  if (isOpen) window.addEventListener('keydown', onKey)
+  else window.removeEventListener('keydown', onKey)
+})
+onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
 function show(i: number) {
   current.value = i
@@ -102,24 +115,30 @@ function isLast(i: number) {
       </div>
     </div>
 
-    <v-img
-      v-if="urls.length === 1"
-      :src="urls[0]"
-      :alt="project.title"
-      height="220"
-      cover
-      :options="{ rootMargin: '800px' }"
-      class="cursor-pointer"
-      @click="show(0)"
-    />
+    <div v-if="urls.length === 1" class="cover cursor-pointer" @click="show(0)">
+      <img :src="urls[0]" :alt="project.title" loading="lazy" decoding="async" />
+    </div>
 
     <div
       v-else-if="restUrls.length"
       class="thumbs pa-2"
       :style="{ gridTemplateColumns: `repeat(${restCols}, 1fr)` }"
     >
-      <div v-for="(u, i) in restUrls" :key="u" class="thumb cursor-pointer" @click="show(sideCount + i)">
-        <v-img :src="u" :alt="project.title" cover position="top" height="100%" :options="{ rootMargin: '800px' }" />
+      <div
+        v-for="(u, i) in restUrls"
+        :key="u"
+        class="thumb cursor-pointer"
+        :class="{ hero: heroLayout && i === 0, contain: project.fit === 'contain' && !(heroLayout && i === 0) }"
+        @click="show(sideCount + i)"
+      >
+        <v-img
+          :src="u"
+          :alt="project.title"
+          :cover="!(project.fit === 'contain' && !(heroLayout && i === 0))"
+          position="top"
+          height="100%"
+          :options="{ rootMargin: '800px' }"
+        />
         <div v-if="isLast(sideCount + i)" class="more display">+{{ extra }}</div>
       </div>
     </div>
@@ -164,11 +183,15 @@ function isLast(i: number) {
     </v-dialog>
 
     <v-dialog v-model="open" max-width="1100">
-      <v-carousel v-model="current" hide-delimiters height="85vh" show-arrows="hover" class="rounded-xl">
-        <v-carousel-item v-for="u in urls" :key="u">
-          <v-img :src="u" :alt="project.title" height="100%" @click="open = false" />
-        </v-carousel-item>
-      </v-carousel>
+      <div class="viewer">
+        <v-carousel v-model="current" hide-delimiters height="85vh" show-arrows class="rounded-xl">
+          <v-carousel-item v-for="u in urls" :key="u">
+            <v-img :src="u" :alt="project.title" height="100%" />
+          </v-carousel-item>
+        </v-carousel>
+        <v-btn icon="mdi-close" variant="flat" color="surface" class="viewer-close" aria-label="Close" @click="open = false" />
+        <div class="viewer-count">{{ current + 1 }} / {{ urls.length }}</div>
+      </div>
     </v-dialog>
   </v-card>
 </template>
@@ -195,8 +218,18 @@ function isLast(i: number) {
 .tile.wide { grid-column: span 2; }
 .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
+.viewer { position: relative; }
+.viewer-close { position: absolute; top: 12px; right: 12px; z-index: 3; }
+.viewer-count {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 3;
+  padding: 2px 12px; border-radius: 999px; background: rgba(0, 0, 0, 0.55); color: #fff; font-size: 0.85rem;
+}
+.cover { aspect-ratio: 16 / 9; overflow: hidden; }
+.cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .thumbs { display: grid; gap: 6px; }
 .thumb { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 12px; }
+.thumb.hero { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+.thumb.contain { background: rgba(var(--v-theme-on-surface), 0.06); }
 .more {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   background: rgba(0, 0, 0, 0.55); color: #fff; font-size: 1.25rem; font-weight: 600;

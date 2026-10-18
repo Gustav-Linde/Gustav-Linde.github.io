@@ -7,6 +7,10 @@ export interface Project {
   /** Folder under public/projects, images are listed in `images`. */
   folder?: string
   images?: string[]
+  /** 'hero': the first image spans a 2 x 2 block with the rest beside it (needs 5 images). */
+  layout?: 'hero'
+  /** Show the smaller images whole instead of cropping them to fill the tile (for screenshots). */
+  fit?: 'contain'
   embed?: string
   /** Videos in the project's folder; `ratio` is width / height so mixed shapes line up. */
   videos?: { file: string; poster: string; ratio: number }[]
@@ -91,7 +95,12 @@ export const projects: Project[] = [
       'Vue 3 + Vuetify frontend, plus a public sales site in Afrikaans and English',
       'Form definitions in JSON that drive both the web form and the generated PDF',
       'Production on a Google Cloud VM with nightly backups',
+      'The screens shown use sample data. The app itself is in Afrikaans, the language of its users',
     ],
+    folder: 'CommonSense',
+    layout: 'hero',
+    fit: 'contain',
+    images: ['hero.png', 'dashboard.png', 'client-record.png', 'schedule-analysis.png', 'record-of-advice.png'],
     link: { label: 'Visit the sales site', href: 'https://www.common-sense.co.za' },
   },
   {

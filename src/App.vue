@@ -47,8 +47,6 @@ onMounted(() => {
   else window.addEventListener('load', start, { once: true })
 })
 
-const featured = projects[0]
-const others = projects.slice(1)
 </script>
 
 <template>
@@ -152,9 +150,8 @@ const others = projects.slice(1)
           <h2 class="display text-h4 font-weight-bold mb-2">Side quests and builds</h2>
           <p class="text-medium-emphasis mb-8">Software, electronics and things made with my hands.</p>
 
-          <ProjectCard :project="featured" featured class="mb-6" />
           <v-row>
-            <v-col v-for="p in others" :key="p.title" cols="12" md="6">
+            <v-col v-for="p in projects" :key="p.title" cols="12" md="6">
               <ProjectCard :project="p" />
             </v-col>
           </v-row>
