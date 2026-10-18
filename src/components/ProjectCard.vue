@@ -118,7 +118,7 @@ function isLast(i: number) {
       :style="{ gridTemplateColumns: `repeat(${restCols}, 1fr)` }"
     >
       <div v-for="(u, i) in restUrls" :key="u" class="thumb cursor-pointer" @click="show(sideCount + i)">
-        <v-img :src="u" :alt="project.title" cover height="100%" />
+        <v-img :src="u" :alt="project.title" cover position="top" height="100%" />
         <div v-if="isLast(sideCount + i)" class="more display">+{{ extra }}</div>
       </div>
     </div>

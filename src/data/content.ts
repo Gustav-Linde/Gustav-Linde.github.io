@@ -143,9 +143,18 @@ export const projects: Project[] = [
     description: 'An ESP32-based sand table controller with mDNS provisioning for easy network setup.',
   },
   {
-    title: 'PIT-tag Bird Tracker',
-    tags: ['ESP32', 'RFID', 'Data logging'],
-    description: 'An ESP32-based bird tracker built around PIT tags.',
+    title: 'TagNest: PIT-tag Bird Tracker',
+    tags: ['ESP32', 'RFID', 'Data logging', 'Web UI', 'mDNS'],
+    description:
+      'An ESP32-based tracker that reads the PIT tags of visiting birds and logs each visit. The device hosts its own web interface, so it can be configured and monitored from a phone with no internet connection.',
+    points: [
+      'Tag reading: an RFID reader with a coil antenna picks up each tag ID as a bird passes, and the antenna number is recorded for readers with more than one antenna',
+      'Logging: every event is stored with a timestamp and the temperature, kept accurate by a real-time clock, with files saved to an SD card',
+      'Web interface: served by the ESP32 and reached at tagnest.local using mDNS, with a live feed of tag events, SD card file list, clock setting and syncing',
+      'Power saving: a night mode that puts the device to sleep between set times',
+    ],
+    folder: 'TagNest',
+    images: ['breadboard.jpg', 'web-interface.jpg'],
   },
   {
     title: 'Desktop CNC Router',
