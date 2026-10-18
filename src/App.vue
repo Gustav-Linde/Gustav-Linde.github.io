@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useTheme } from 'vuetify'
 import { THEME_KEY } from './plugins/vuetify'
 import { education, experience, links, profile, projects, skills } from './data/content'
@@ -19,6 +19,33 @@ const nav = [
   { label: 'Skills', href: '#skills' },
   { label: 'Contact', href: '#contact' },
 ]
+
+// Once the page itself has loaded, fetch every photo and video poster in the background,
+// top to bottom, a few at a time, so they are ready before the visitor scrolls to them.
+// Videos are not preloaded; they only download when played.
+function preloadImages() {
+  const queue = projects.flatMap((p) => {
+    const dir = `/projects/${encodeURIComponent(p.folder ?? '')}/`
+    return [
+      ...(p.videos ?? []).map((v) => dir + encodeURIComponent(v.poster)),
+      ...(p.images ?? []).map((f) => dir + encodeURIComponent(f)),
+    ]
+  })
+  let next = 0
+  const pump = () => {
+    if (next >= queue.length) return
+    const img = new Image()
+    img.onload = img.onerror = pump
+    img.src = queue[next++]
+  }
+  for (let i = 0; i < 3; i++) pump()
+}
+
+onMounted(() => {
+  const start = () => (window.requestIdleCallback ? window.requestIdleCallback(preloadImages) : setTimeout(preloadImages, 500))
+  if (document.readyState === 'complete') start()
+  else window.addEventListener('load', start, { once: true })
+})
 
 const featured = projects[0]
 const others = projects.slice(1)
