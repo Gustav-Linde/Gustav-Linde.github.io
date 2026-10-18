@@ -7,9 +7,11 @@ const props = defineProps<{ project: Project; featured?: boolean }>()
 const urls = computed(() =>
   (props.project.images ?? []).map((f) => `/projects/${encodeURIComponent(props.project.folder!)}/${encodeURIComponent(f)}`),
 )
-// 3 columns, up to 3 rows
+// up to 3 columns and 3 rows
+const cols = computed(() => Math.min(3, urls.value.length))
 const thumbs = computed(() => urls.value.slice(0, 9))
 const extra = computed(() => urls.value.length - thumbs.value.length)
+const base = computed(() => `/projects/${encodeURIComponent(props.project.folder ?? '')}/`)
 const open = ref(false)
 const current = ref(0)
 
@@ -21,6 +23,19 @@ function show(i: number) {
 
 <template>
   <v-card class="glass lift h-100 d-flex flex-column" rounded="xl" :class="{ featured }">
+    <div v-if="project.videos" class="videos">
+      <video
+        v-for="v in project.videos"
+        :key="v.file"
+        controls
+        preload="metadata"
+        playsinline
+        :style="{ flex: `${v.ratio} 1 0`, aspectRatio: String(v.ratio) }"
+        :poster="base + encodeURIComponent(v.poster)"
+        :src="base + encodeURIComponent(v.file)"
+      />
+    </div>
+
     <v-img
       v-if="urls.length === 1"
       :src="urls[0]"
@@ -31,7 +46,7 @@ function show(i: number) {
       @click="show(0)"
     />
 
-    <div v-else-if="urls.length" class="thumbs pa-2">
+    <div v-else-if="urls.length" class="thumbs pa-2" :style="{ gridTemplateColumns: `repeat(${cols}, 1fr)` }">
       <div v-for="(u, i) in thumbs" :key="u" class="thumb cursor-pointer" @click="show(i)">
         <v-img :src="u" :alt="project.title" cover height="100%" />
         <div v-if="i === thumbs.length - 1 && extra > 0" class="more display">+{{ extra }}</div>
@@ -73,7 +88,9 @@ function show(i: number) {
 </template>
 
 <style scoped>
-.thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.videos { display: flex; gap: 6px; padding: 8px 8px 0; align-items: flex-start; }
+.videos video { min-width: 0; max-width: 100%; border-radius: 12px; background: #000; }
+.thumbs { display: grid; gap: 6px; }
 .thumb { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 12px; }
 .more {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;

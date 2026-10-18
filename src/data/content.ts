@@ -8,6 +8,8 @@ export interface Project {
   folder?: string
   images?: string[]
   embed?: string
+  /** Videos in the project's folder; `ratio` is width / height so mixed shapes line up. */
+  videos?: { file: string; poster: string; ratio: number }[]
 }
 
 export interface Job {
@@ -96,12 +98,21 @@ export const projects: Project[] = [
     title: 'Automated Bottle Filling System',
     tags: ['OpenCV', 'Python', 'CNC'],
     description:
-      'A computer vision system that detects bottle positions and drives a CNC machine to position and fill them automatically.',
+      'A computer vision system that detects bottle positions and drives a CNC machine to position and fill them automatically. An overhead camera is calibrated with a checkerboard, and the detected positions are turned into machine coordinates. Washers stand in for bottles in these tests.',
+    folder: 'BottleFiller',
+    images: ['bed-camera.jpg', 'detection-screen.jpg', 'calibration.jpg', 'workshop.jpg', 'programming.jpg'],
+    videos: [
+      { file: 'arm-move.mp4', poster: 'arm-move-poster.jpg', ratio: 716 / 1536 },
+      { file: 'detection.mp4', poster: 'detection-poster.jpg', ratio: 848 / 396 },
+    ],
   },
   {
     title: 'CNC Lathe Conversion',
     tags: ['Control software', 'Retrofit', 'Machining'],
     description: 'Converted a standard Adendorff lathe into a CNC machine, including the control software.',
+    folder: 'Lathe',
+    images: ['lathe-overview.jpg', 'stepper-mount.jpg'],
+    videos: [{ file: 'lathe-cnc.mp4', poster: 'lathe-cnc-poster.jpg', ratio: 16 / 9 }],
   },
   {
     title: 'Sand Table Controller',
