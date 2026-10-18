@@ -222,8 +222,8 @@ export const projects: Project[] = [
   },
   {
     title: 'Corrugated Zinc Wall',
-    tags: ['Carpentry', 'Building'],
-    description: 'A corrugated zinc wall, from bare frame to finished (2020).',
+    tags: ['Carpentry', 'Building', 'Reclaimed materials'],
+    description: 'A corrugated zinc wall, built from reclaimed zinc that used to be on a roof, from bare frame to finished (2020).',
     folder: 'Zink Muur',
     images: [
       '20200613_154843.jpg',
@@ -236,8 +236,19 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: 'Tuks Baja',
+    tags: ['Baja SAE', 'Lathe', 'Milling', 'Frame design', 'Team project'],
+    description:
+      'Member of the Tuks Baja team, the University of Pretoria student team that designs and builds an off-road car for the Baja SAE competition. Every university gets the same Briggs & Stratton engine and has to build a car around it, so the team developed everything else from scratch, including its own dampers, frame and reduction gearbox, which works with an off-the-shelf CVT. Teams then compete in a 3-hour endurance race, a hill climb and a design competition.',
+    points: [
+      'Machining: lathe and milling work on the car\'s components',
+      'Frame: profile design and cutting for the frame',
+    ],
+  },
+  {
     title: 'Clock from Reclaimed Pallet Wood',
-    tags: ['Carpentry', 'Electronics', 'RTC'],
+    tags: ['Carpentry', 'Reclaimed materials'],
+    description: 'A wall clock made from reclaimed pallet wood, fitted with an off-the-shelf clock mechanism.',
     folder: 'WoodClock',
     images: ['IMG_1212.JPG'],
   },
