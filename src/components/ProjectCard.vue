@@ -95,7 +95,7 @@ function isLast(i: number) {
             :class="{ wide: sideUrls.length % 2 === 1 && i === sideUrls.length - 1 }"
             @click="show(i)"
           >
-            <img :src="u" :alt="project.title" loading="lazy" />
+            <img :src="u" :alt="project.title" loading="lazy" decoding="async" />
             <div v-if="isLast(i)" class="more display">+{{ extra }}</div>
           </div>
         </div>
@@ -108,6 +108,7 @@ function isLast(i: number) {
       :alt="project.title"
       height="220"
       cover
+      :options="{ rootMargin: '800px' }"
       class="cursor-pointer"
       @click="show(0)"
     />
@@ -118,7 +119,7 @@ function isLast(i: number) {
       :style="{ gridTemplateColumns: `repeat(${restCols}, 1fr)` }"
     >
       <div v-for="(u, i) in restUrls" :key="u" class="thumb cursor-pointer" @click="show(sideCount + i)">
-        <v-img :src="u" :alt="project.title" cover position="top" height="100%" />
+        <v-img :src="u" :alt="project.title" cover position="top" height="100%" :options="{ rootMargin: '800px' }" />
         <div v-if="isLast(sideCount + i)" class="more display">+{{ extra }}</div>
       </div>
     </div>
