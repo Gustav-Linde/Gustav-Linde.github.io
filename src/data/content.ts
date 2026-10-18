@@ -103,6 +103,34 @@ export const projects: Project[] = [
     images: ['rc-plane.jpg'],
   },
   {
+    title: 'Kitchen Cabinets',
+    tags: ['Fusion 360', 'CAD', 'Cabinet making', 'Installation'],
+    description:
+      'Kitchen cabinets for one of my apartments, taken from design to a finished kitchen. I designed everything in Fusion 360, had the panels cut and edged at Lumber King, then assembled and installed the cabinets myself.',
+    points: [
+      'Design: the full upper and lower runs modelled in Fusion 360, with doors, drawers and the sink and hob positions worked out up front',
+      'Cutting and edging: panels cut and edge-banded at Lumber King from the CAD design',
+      'Assembly: carcasses, drawers and door fronts put together and clamped by myself',
+      'Installation: base units levelled and fitted, worktop with built-in sink and two-plate hob, and wall cabinets hung',
+    ],
+    folder: 'Kitchen',
+    images: [
+      'finished-kitchen.jpg',
+      'fusion-design.jpg',
+      'cut-panels.jpg',
+      'carcasses.jpg',
+      'base-units-worktop.jpg',
+      'drawer-front.jpg',
+      'installation.jpg',
+      'finished-side.jpg',
+      'finished-room.jpg',
+      'door-grain.jpg',
+      'sink-worktop.jpg',
+      'drawer-box.jpg',
+      'finished-hall.jpg',
+    ],
+  },
+  {
     title: 'Automated Bottle Filling System',
     tags: ['OpenCV', 'Python', 'CNC'],
     description:
