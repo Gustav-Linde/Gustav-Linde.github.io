@@ -195,8 +195,8 @@ export const projects: Project[] = [
   },
   {
     title: 'Desktop CNC Router',
-    tags: ['Fusion 360', 'Python', 'GRBL'],
-    description: 'A desktop-sized CNC router, designed in CAD and driven from Python over GRBL.',
+    tags: ['Fusion 360', 'CAD', 'Sheet metal', 'CNC'],
+    description: 'An alternative design for a desktop CNC router, built from sheet metal and modelled in Fusion 360. The 3D model above is interactive.',
     embed:
       'https://gmail190897.autodesk360.com/shares/public/SH35dfcQT936092f0e4337bab64a68f2018e?mode=embed',
   },
