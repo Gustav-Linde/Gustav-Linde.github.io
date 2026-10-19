@@ -115,7 +115,7 @@ function isLast(i: number) {
       </div>
     </div>
 
-    <div v-if="urls.length === 1" class="cover cursor-pointer" @click="show(0)">
+    <div v-if="urls.length === 1" class="cover cursor-pointer" :style="{ aspectRatio: String(project.coverRatio ?? 16 / 9) }" @click="show(0)">
       <img :src="urls[0]" :alt="project.title" loading="lazy" decoding="async" />
     </div>
 

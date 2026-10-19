@@ -10,6 +10,7 @@ export interface Project {
   /** 'hero': the first image spans a 2 x 2 block with the rest beside it (needs 5 images). */
   layout?: 'hero'
   /** Show the smaller images whole instead of cropping them to fill the tile (for screenshots). */
+  coverRatio?: number
   fit?: 'contain'
   embed?: string
   /** Videos in the project's folder; `ratio` is width / height so mixed shapes line up. */
@@ -179,6 +180,7 @@ export const projects: Project[] = [
     tags: ['ESP32', 'mDNS provisioning'],
     folder: 'SandTable',
     images: ['sand-table.jpg'],
+    coverRatio: 1,
     description: 'An ESP32-based sand table controller with mDNS provisioning for easy network setup. The table draws intricate patterns in sand, like the stag above, on a backlit surface.',
   },
   {
