@@ -177,7 +177,9 @@ export const projects: Project[] = [
   {
     title: 'Sand Table Controller',
     tags: ['ESP32', 'mDNS provisioning'],
-    description: 'An ESP32-based sand table controller with mDNS provisioning for easy network setup.',
+    folder: 'SandTable',
+    images: ['sand-table.jpg'],
+    description: 'An ESP32-based sand table controller with mDNS provisioning for easy network setup. The table draws intricate patterns in sand, like the stag above, on a backlit surface.',
   },
   {
     title: 'TagNest: PIT-tag Bird Tracker',
